@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "weatherappfinalproject"
+version = "0.1.0"
+description = ""
+authors = ["FaurCristian <faur.cristian96@yahoo.ro>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+pillow = "^10.1.0"
+geopy = "^2.4.0"
+timezonefinder = "^6.2.0"
+pytz = "^2023.3.post1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
