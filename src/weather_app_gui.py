@@ -251,7 +251,7 @@ class WeatherAppGUI:
 
             url_2 = "https://ai-weather-by-meteosource.p.rapidapi.com/daily"
 
-            querystring_2 = {"lat": "37.81021", "lon": "-122.42282", "language": "en", "units": "metric"}
+            querystring_2 = {"place_id": city, "language": "en", "units": "metric"}
 
             headers_2 = {
                 "X-RapidAPI-Key": "66914dd25amshce3d79e92365c71p17ee14jsn6a50319ddb00",
