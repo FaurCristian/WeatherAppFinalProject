@@ -12,7 +12,7 @@ wind speed, and weather description for a specified location.
 day.
 - **Timezone and Clock:** The app displays the current local time and timezone for the selected location.
 ## Architecture Diagram
-![Weather App Architecture Diagram](Cresources/ArchitectureDiagram.png)
+![Weather App Architecture Diagram](resources/ArchitectureDiagram.png)
 
 ## Process Flow Diagram
 ![Weather App Process Flow Diagram](resources/processflow.drawio.png)
