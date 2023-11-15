@@ -1,3 +1,4 @@
+import csv
 import tkinter as tk
 from datetime import datetime, timedelta
 from tkinter import *
@@ -5,6 +6,9 @@ from tkinter import messagebox
 import requests
 from PIL import ImageTk
 from weather_data import WeatherData
+import matplotlib.pyplot as plt
+import pandas as pd
+
 
 
 class WeatherAppGUI:
@@ -223,6 +227,65 @@ class WeatherAppGUI:
         self.day7temp.place(x=2, y=70)
         print("Cells created.")
 
+    def write_data_to_csv(self, city, data2):
+        csv_file_path = f"csv_file/{city}_data2_weather.csv"
+        csv_header = [
+            "Day", "Temperature Min", "Temperature Max", "Wind Speed", "Wind Gusts",
+            "Pressure", "Precipitation", "Precipitation Probability", "Storm Probability",
+            "Freeze Probability", "Ozone", "Humidity", "Visibility"
+        ]
+
+        with open(csv_file_path, mode='w', newline='') as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerow(csv_header)
+
+            for i in range(6):
+                day_data = data2['daily']['data'][i]
+                row = [
+                    day_data.get("day", ""),
+                    day_data.get("temperature_min", ""),
+                    day_data.get("temperature_max", ""),
+                    day_data.get("wind", {}).get("speed", ""),
+                    day_data.get("pressure", ""),
+                    day_data.get("precipitation", {}).get("total", ""),
+                    day_data.get("probability", {}).get("precipitation", ""),
+                    day_data.get("probability", {}).get("storm", ""),
+                    day_data.get("probability", {}).get("freeze", ""),
+                    day_data.get("humidity", ""),
+                ]
+                writer.writerow(row)
+
+    def visualize_temperature(self, city):
+        print("Visualizing temperature...")
+
+        # Load data from CSV
+        csv_file_path = f"csv_file/{city}_data2_weather.csv"
+        try:
+            df = pd.read_csv(csv_file_path)
+        except Exception as e:
+            print(f"Error loading CSV file: {e}")
+            return
+
+        # Extract relevant data for plotting
+        days = df['Day']
+        temp_min = df['Temperature Min']
+        temp_max = df['Temperature Max']
+
+        # Plotting
+        plt.figure(figsize=(10, 5))
+        plt.plot(days, temp_min, label='Min Temperature', marker='o')
+        plt.plot(days, temp_max, label='Max Temperature', marker='o')
+        plt.title(f'Temperature Forecast for {city}')
+        plt.xlabel('Day')
+        plt.ylabel('Temperature (°C)')
+        plt.legend()
+        plt.grid(True)
+
+        # Save the plot as PNG
+        plt.savefig(f"png_file/{city}_temperature_forecast.png")
+
+        print("Temperature visualization complete.")
+
     def getweather(self):
         print("Getting weather data...")
         try:
@@ -259,8 +322,13 @@ class WeatherAppGUI:
             }
 
             response_daily = requests.get(url_2, headers=headers_2, params=querystring_2)
-
             data2 = response_daily.json()
+
+            # Write data2 to CSV
+            self.write_data_to_csv(city, data2)
+
+            # Visualize temperature data and save as PNG
+            self.visualize_temperature(city)
 
             # current
             temp = data['hourly']['data'][0]['temperature']
@@ -373,6 +441,3 @@ class WeatherAppGUI:
         except Exception:
             messagebox.showerror("Weather App", "Invalid Entry!!")
         print("getweather function execution complete.")
-
-
-
