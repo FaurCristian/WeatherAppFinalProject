@@ -15,7 +15,7 @@ day.
 ![Weather App Architecture](resources/ArchitectureDiagram.png)
 
 ## Process Flow Diagram
-![Weather App Screenshot](resources/processflow.drawio.png)
+![Weather App Screenshot](resources/processflow.png)
 
 
 
