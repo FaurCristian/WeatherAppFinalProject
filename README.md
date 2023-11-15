@@ -15,7 +15,7 @@ day.
 ![Weather App Architecture](C:\Users\Cristi\PycharmProjects\WeatherAppFinalProject\resources\ArchitectureDiagram.png)
 
 ## Process Flow Diagram
-![Weather App Screenshot](C:\Users\Cristi\PycharmProjects\WeatherAppFinalProject\resources\processflow.png)
+![Weather App Screenshot](C:\Users\Cristi\PycharmProjects\WeatherAppFinalProject\resources\processflow.drawio.png)
 
 
 
