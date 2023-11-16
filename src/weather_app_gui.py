@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-
 class WeatherAppGUI:
     def __init__(self, window):
         print("Initializing WeatherAppGUI.")
@@ -227,7 +226,8 @@ class WeatherAppGUI:
         self.day7temp.place(x=2, y=70)
         print("Cells created.")
 
-    def write_data_to_csv(self, city, data2):
+    @staticmethod
+    def write_data_to_csv(city, data2):
         csv_file_path = f"csv_file/{city}_data2_weather.csv"
         csv_header = [
             "Day", "Temperature Min", "Temperature Max", "Wind Speed", "Wind Gusts",
@@ -255,7 +255,8 @@ class WeatherAppGUI:
                 ]
                 writer.writerow(row)
 
-    def visualize_temperature(self, city):
+    @staticmethod
+    def visualize_temperature(city):
         print("Visualizing temperature...")
 
         # Load data from CSV
