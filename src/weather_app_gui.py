@@ -239,7 +239,7 @@ class WeatherAppGUI:
             writer = csv.writer(csv_file)
             writer.writerow(csv_header)
 
-            for i in range(6):
+            for i in range(7):
                 day_data = data2['daily']['data'][i]
                 row = [
                     day_data.get("day", ""),
